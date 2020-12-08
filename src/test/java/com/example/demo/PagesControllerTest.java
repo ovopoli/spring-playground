@@ -8,7 +8,9 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.ResultMatcher;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 @WebMvcTest(PagesController.class)
 public class PagesControllerTest {
@@ -22,5 +24,11 @@ public class PagesControllerTest {
         this.mvc.perform(request)
                 .andExpect(status().isOk())
                 .andExpect(content().string("Hello World"));
+    }
+    @Test
+    public void testingPi() throws Exception {
+        this.mvc.perform(get("/math/pi"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("3.141592653589793"));
     }
 }
